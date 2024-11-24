@@ -25,12 +25,15 @@ async function getCategoryData(slug: string) {
   return await client.fetch(query, { slug })
 }
 
+type Params = Promise<{ slug: string }>;
+
 export default async function CategoryPage({
   params,
 }: {
-  params: { slug: string }
+  params: Params
 }) {
-  const categoryData = await getCategoryData(params.slug)
+  const { slug } = await params
+  const categoryData = await getCategoryData(slug)
 
   return (
     <div className="min-h-screen bg-[#E8F3F0]">
