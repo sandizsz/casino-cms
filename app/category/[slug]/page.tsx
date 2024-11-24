@@ -2,6 +2,14 @@ import { client } from "@/sanity/lib/client"
 import { Casino } from "../../utils/interface"
 import CasinoComponent from "../../components/CasinoComponent"
 
+// Define proper types for the page props
+type Props = {
+  params: {
+    slug: string
+  }
+  searchParams?: { [key: string]: string | string[] | undefined }
+}
+
 async function getCategoryData(slug: string) {
   const query = `*[_type == "category" && slug.current == $slug][0] {
     title,
@@ -21,17 +29,13 @@ async function getCategoryData(slug: string) {
       }
     }
   }`
-
   return await client.fetch(query, { slug })
 }
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+// Add proper type annotation for the page component
+export default async function CategoryPage({ params }: Props) {
   const categoryData = await getCategoryData(params.slug)
-
+  
   return (
     <div className="min-h-screen bg-[#E8F3F0]">
       <section className="py-20 bg-gradient-to-b from-[#00BFA5] to-[#E8F3F0] text-white">
@@ -44,11 +48,8 @@ export default async function CategoryPage({
           </p>
         </div>
       </section>
-
       <section className="py-20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-         
-
           <div className="grid gap-6">
             {categoryData.casinos?.length > 0 ? (
               categoryData.casinos.map((casino: Casino) => (
@@ -64,4 +65,15 @@ export default async function CategoryPage({
       </section>
     </div>
   )
+}
+
+// Add generateStaticParams if you want to statically generate pages
+export async function generateStaticParams() {
+  const categories = await client.fetch(`*[_type == "category"] {
+    "slug": slug.current
+  }`)
+  
+  return categories.map((category: { slug: string }) => ({
+    slug: category.slug,
+  }))
 }
