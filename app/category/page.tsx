@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client";
+/* import { client } from "@/sanity/lib/client"; */
 import React from 'react'
 /* import { Category } from "../utils/interface"; */
 
