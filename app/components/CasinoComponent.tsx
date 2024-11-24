@@ -24,8 +24,8 @@ const CasinoComponent = ({ casino }: CasinoComponentProps) => {
                       height={80}
                       className="mx-auto"
                     />
-                    <div className="space-y-2">
-                      <div className="flex gap-2 flex-wrap">
+                    <div className="space-y-2 text-center md:text-start">
+                      <div className="flex gap-2 flex-wrap justify-center md:justify-start">
                        
                  
                         {casino.categories?.map((category) => (
