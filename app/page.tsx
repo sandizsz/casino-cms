@@ -172,7 +172,7 @@ export default async function Home() {
                 <span className="text-[#00BFA5]"> increase your winnings</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                We care about you and your experience in the casinos we are providing, that's why we have
+                We care about you and your experience in the casinos we are providing, that&apos;s why we have
                 prepared complete guides of most popular casino games
               </p>
             </div>
