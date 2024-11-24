@@ -1,11 +1,8 @@
 import { Card, CardContent } from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
-import { Badge } from "@/app/components/ui/badge";
 import { Headphones, Shield, Gamepad2, CreditCard, Gift } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 
 import { client } from "@/sanity/lib/client";
 import { Casino } from "./utils/interface";
