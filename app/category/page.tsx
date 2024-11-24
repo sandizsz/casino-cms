@@ -1,8 +1,8 @@
 import { client } from "@/sanity/lib/client";
 import React from 'react'
-import { Category } from "../utils/interface";
+/* import { Category } from "../utils/interface"; */
 
-async function getAllCategories() {
+/* async function getAllCategories() {
   const query = `*[_type == "category"] {
     title,
     slug,
@@ -12,12 +12,12 @@ async function getAllCategories() {
   const categories = await client.fetch(query);
   console.log('Server-side data:', categories);
   return categories;
-}
+} */
 
 export const revalidate = 60;
 
 const page = async () => {
-  const categories: Category[] = await getAllCategories();
+  /* const categories: Category[] = await getAllCategories(); */
   
   return (
     <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
