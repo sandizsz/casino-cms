@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/app/components/ui/card";
-import { Headphones, Shield, Gamepad2, CreditCard, Gift } from 'lucide-react';
+import { Headphones, Shield, Gamepad2 } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 
