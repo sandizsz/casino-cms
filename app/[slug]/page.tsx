@@ -35,9 +35,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: PageProps) {
-  const parameters = await params;
-  const slug = parameters.slug;
+export default async function Page({ params }: { params: PageProps['params'] }) {
+  const slug = params.slug;
   const page = pages.find((p) => p.slug === slug);
 
   if (!page) {
