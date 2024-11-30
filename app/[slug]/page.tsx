@@ -24,9 +24,10 @@ const pages: PageData[] = [
 ];
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: { 
+    slug: string 
+  }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateStaticParams() {
@@ -35,14 +36,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ 
+  params 
+}: { 
+  params: { slug: string } 
+}): Promise<JSX.Element> {
   const slug = params.slug;
   const page = pages.find((p) => p.slug === slug);
-
+  
   if (!page) {
     notFound();
   }
-
+  
   return (
     <AnimatedSection>
       <div className="container mx-auto px-4 py-8">
@@ -64,7 +69,7 @@ export default async function Page({ params }: PageProps) {
           )}
           {page.image && <h1 className="text-4xl font-bold mb-4">{page.title}</h1>}
           <p className="text-xl text-gray-400 mb-8">{page.description}</p>
-          <div 
+          <div
             className="prose prose-lg prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: page.content }}
           />
