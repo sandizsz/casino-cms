@@ -1,17 +1,20 @@
-import { Card, CardContent } from "@/app/components/ui/card";
-import { Headphones, Shield, Gamepad2 } from 'lucide-react';
+import { Card, CardContent } from "./components/ui/card";
+import { Headphones, Shield, Gamepad2, ArrowRight } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-
-
-import { client } from "@/sanity/lib/client";
+import { client } from "../sanity/lib/client";
 import { Casino } from "./utils/interface";
 import CasinoComponent from "./components/CasinoComponent";
-import AnimatedSection from "./components/AnimatedSection"
-
+import AnimatedSection from "./components/AnimatedSection";
+import CountUp from "./components/CountUp";
+import { blackjackData } from "./data/pages/blackjack";
+import { rouletteData } from "./data/pages/roulette";
+import { baccaratData } from "./data/pages/baccarat";
+import { casinoGuidesData } from "./data/pages/guides";
 
 async function getPosts() {
   const query = `*[_type == "casino"] {
+    _id,
     offerTitle,
     offerUrl,
     offerDescription,
@@ -26,16 +29,13 @@ async function getPosts() {
   }`;
 
   const data = await client.fetch(query);
-
   return data;
 }
 
 export const revalidate = 60;
 
 export default async function Home() {
-
-  const casinos: Casino[] = await getPosts()
-  console.log(casinos, 'casinos')
+  const casinos: Casino[] = await getPosts();
 
   const features = [
     {
@@ -53,89 +53,49 @@ export default async function Home() {
       title: "Quality Games",
       description: "To get the best gaming experience it is also crucial with a wide variety of quality games. You should be able to play all popular types of games from a wide range of providers."
     }
-  ]
-
-  /*
-
-  const casinosold = [
-    {
-      name: "BetiBet",
-      logo: "/placeholder.svg",
-      offer: "100% up to €1000",
-      freeSpins: "PLUS 1 FREE BET",
-      rating: 9.9
-    },
-    {
-      name: "Slots Gallery",
-      logo: "/placeholder.svg",
-      offer: "100% up to €500",
-      freeSpins: "100 Free Spins",
-      rating: 9.9
-    }
-  ]
-
-  */
+  ];
 
   const guides = [
-    {
-      title: "Blackjack Guide",
-      image: "/images/blackjack_rules.jpg",
-      description: "You must know the basics of the game before you get down to playing it. Go through our entire website to learn about the different aspects of playing blackjack."
-    },
-    {
-      title: "Roulette Guide",
-      image: "/images/roullete.png",
-      description: "This guide has everything you need to know on how to increase your chances to win at roulette and get better odds when you play this exciting casino game."
-    },
-    {
-      title: "Baccarat Guide",
-      image: "/images/baccarat.jpeg",
-      description: "With the right baccarat strategy, you can help grow your bankroll, raise your winning odds, and take your gameplay to the next level."
-    }
-  ]
+    blackjackData,
+    rouletteData,
+    baccaratData
+  ];
 
   return (
-    <div className="min-h-screen bg-[#E8F3F0] overflow-x-hidden">
-      <main>
+    <div className="min-h-screen bg-[#0D1117] text-white">
+      <main className="relative">
         {/* Hero Section */}
-        <AnimatedSection className="w-full py-20 bg-gradient-to-b from-[#00BFA5] to-[#E8F3F0] text-white">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
-            <h1 className="text-4xl md:text-6xl font-bold">
-              First class online casino experience
+        <AnimatedSection className="w-full py-20 bg-gradient-to-b from-[#1E2A44] to-[#0D1117] relative overflow-hidden">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8 relative">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] animate-glow">
+            WELCOME TO GAMBLESTRIKE
             </h1>
-            <p className="text-xl max-w-2xl mx-auto">
-              First class online casino experience and bonuses offered by leading industry professionals
+            <p className="text-xl max-w-2xl mx-auto text-[#C0C0C0]">
+              On this page, you will find a wide ranch of deposit and no deposit casino bonus offers. Quickly compare the alternatives by browsing through the updated list of casino bonuses below. We have everything from generous welcome bonuses, a lot of free spins, cash back bonuses and more. We aim to have something for everyone and will continue to do our best to provide the most competitive comparison list for our visitors.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto pt-12">
-              <div className="space-y-2">
-                <div className="text-5xl font-bold">2500</div>
-                <div className="text-sm">
-                  Deposit Bonus
-                  <br />(EUR)
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-5xl font-bold">200</div>
-                <div className="text-sm">
-                  Free Spins
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-5xl font-bold">30</div>
-                <div className="text-sm">
-                  Sign Up Bonus
-                  <br />(EUR)
-                </div>
-              </div>
+              <CountUp
+                end={2500}
+                label="Deposit Bonus<br />(EUR)"
+                suffix=""
+              />
+              <CountUp
+                end={200}
+                label="Free Spins"
+              />
+              <CountUp
+                end={30}
+                label="Sign Up Bonus<br />(EUR)"
+              />
             </div>
           </div>
         </AnimatedSection>
 
         {/* Casino Offers */}
-        <AnimatedSection className="w-full py-20">
+        <AnimatedSection className="w-full py-20 bg-[#0D1117]">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              Most exciting offers picked by SLOTSSEASON
+            <h2 className="text-3xl font-bold text-center mb-12 text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]">
+              Most exciting offers picked by GAMBLESTRIKE
             </h2>
 
             <div className="grid gap-6">
@@ -147,16 +107,16 @@ export default async function Home() {
         </AnimatedSection>
 
         {/* Features */}
-        <AnimatedSection className="w-full py-20 bg-white">
+        <AnimatedSection className="w-full py-20 bg-[#1E2A44]">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-12">
               {features.map((feature, index) => (
                 <AnimatedSection key={feature.title} delay={index * 0.2} className="text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-[#E8F3F0] flex items-center justify-center mx-auto text-[#00BFA5]">
+                  <div className="w-16 h-16 rounded-full bg-[#00A3FF]/20 flex items-center justify-center mx-auto text-[#FFDD00] shadow-[0_0_20px_rgba(0,163,255,0.3)]">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-[#FFDD00]">{feature.title}</h3>
+                  <p className="text-[#C0C0C0]">{feature.description}</p>
                 </AnimatedSection>
               ))}
             </div>
@@ -164,105 +124,51 @@ export default async function Home() {
         </AnimatedSection>
 
         {/* Casino Guides */}
-        <AnimatedSection className="w-full py-20">
+        <AnimatedSection className="w-full py-20 bg-[#0D1117]">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold text-white">
                 Various casino guides to
-                <span className="text-[#00BFA5]"> increase your winnings</span>
+                <span className="text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"> increase your winnings</span>
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-[#C0C0C0] max-w-2xl mx-auto">
                 We care about you and your experience in the casinos we are providing, that&apos;s why we have
                 prepared complete guides of most popular casino games
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {guides.map((guide, index) => (
-                <AnimatedSection key={guide.title} delay={index * 0.2}>
-                  <Card className="border-none bg-white/50 hover:bg-white transition-colors">
-                    <CardContent className="p-6 space-y-4">
-                      <Image
-                        src={guide.image}
-                        alt={guide.title}
-                        width={500}
-                        height={300}
-                        className="w-full h-[200px] object-cover rounded-lg"
-                      />
-                      <h3 className="text-xl font-bold">{guide.title}</h3>
-                      <p className="text-muted-foreground">{guide.description}</p>
-                    </CardContent>
-                  </Card>
-                </AnimatedSection>
-              ))}
+            <div className="space-y-8">
+              <div className="grid md:grid-cols-3 gap-8">
+                {guides.map((guide, index) => (
+                  <AnimatedSection key={guide.title} delay={index * 0.2}>
+                    <Link href={`/${guide.slug}`}>
+                      <Card className="h-full border border-[#00A3FF] bg-[#1E2A44]/50 hover:bg-[#1E2A44] transition-all duration-300 shadow-[0_0_20px_rgba(0,163,255,0.3)] hover:shadow-[0_0_30px_rgba(0,163,255,0.5)]">
+                        <CardContent className="p-6 flex flex-col h-full space-y-4">
+                          <div className="relative w-full h-[200px]">
+                            <Image
+                              src={guide.image}
+                              alt={guide.title}
+                              fill
+                              className="object-cover rounded-lg"
+                            />
+                          </div>
+                          <h3 className="text-xl font-bold text-[#FFDD00]">{guide.title}</h3>
+                          <p className="text-[#C0C0C0] flex-grow">{guide.description}</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </AnimatedSection>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                <Link href={`/${casinoGuidesData.slug}`} className="inline-flex items-center px-6 py-3 rounded-lg bg-[#00A3FF] hover:bg-[#0082CC] text-white font-semibold transition-colors duration-300">
+                  Read More Guides
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </AnimatedSection>
       </main>
-
-      <footer className="w-full bg-white">
-        {/* Legal Links */}
-        <div className="border-b">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-[#00BFA5]">
-              <Link href="/privacy-policy" className="hover:text-[#008C7A] transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms-conditions" className="hover:text-[#008C7A] transition-colors">
-                Terms & Conditions
-              </Link>
-              <Link href="/cookie-policy" className="hover:text-[#008C7A] transition-colors">
-                Cookie Policy
-              </Link>
-              <Link href="/disclaimer" className="hover:text-[#008C7A] transition-colors">
-                Disclaimer
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Gambling Awareness Logos */}
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            <Image 
-              src="/images/Image1.png" 
-              alt="Gambling Commission" 
-              width={180} 
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
-            <Image 
-              src="/images/Image2.png" 
-              alt="GamCare" 
-              width={180} 
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
-            <Image 
-              src="/images/Image3.png" 
-              alt="BeGambleAware" 
-              width={180} 
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
-            <Image 
-              src="/images/Image4.png" 
-              alt="GamStop" 
-              width={180} 
-              height={40}
-              className="h-8 w-auto object-contain"
-            />
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="border-t">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-            <p className="text-center text-sm text-gray-500">
-              Copyright © {new Date().getFullYear()} slotsseason
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
-  )
+  );
 }

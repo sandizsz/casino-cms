@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import CookieConsentBanner from "./components/CookieConsent";
+import { LoadingProvider } from './context/LoadingContext'
+import LoadingOverlay from './components/LoadingOverlay'
+import { NavigationEvents } from './components/NavigationEvents'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,17 +26,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-     <Navbar />
-     {children}
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-[#0D1117] text-white min-h-screen`}>
+        <LoadingProvider>
+          <NavigationEvents />
+          <LoadingOverlay />
+          <Navbar />
+          {children}
+          <Footer />
+          <CookieConsentBanner />
+        </LoadingProvider>
       </body>
     </html>
-  );
+  )
 }
