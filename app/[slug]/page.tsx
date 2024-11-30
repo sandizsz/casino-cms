@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import AnimatedSection from '../components/AnimatedSection';
-import { PageData } from '../types/page';
+import { PageData } from '../types/pageTypes';
 
 // Import page data
 import { blackjackData } from '../data/pages/blackjack';
