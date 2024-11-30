@@ -22,9 +22,9 @@ interface Casino {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 async function getCasinosByCategory(slug: string) {
