@@ -13,7 +13,7 @@ import { baccaratData } from "./data/pages/baccarat";
 import { casinoGuidesData } from "./data/pages/guides";
 
 async function getPosts() {
-  const query = `*[_type == "casino"] {
+  const query = `*[_type == "casino"] | order(orderRank) {
     _id,
     offerTitle,
     offerUrl,
@@ -99,8 +99,8 @@ export default async function Home() {
             </h2>
 
             <div className="grid gap-6">
-              {casinos?.length > 0 && casinos.map((casino) => (
-                <CasinoComponent key={casino._id} casino={casino} />
+              {casinos?.length > 0 && casinos.map((casino, index) => (
+                <CasinoComponent key={casino._id} casino={casino} index={index} />
               ))}
             </div>
           </div>

@@ -28,7 +28,7 @@ interface PageProps {
 }
 
 async function getCasinosByCategory(slug: string) {
-  const query = `*[_type == "casino" && references(*[_type == "category" && slug.current == "${slug}"]._id)] {
+  const query = `*[_type == "casino" && references(*[_type == "category" && slug.current == "${slug}"]._id)] | order(orderRank) {
     _id,
     offerTitle,
     offerUrl,
@@ -88,9 +88,9 @@ export default async function CategoryPage({ params }: PageProps) {
           </h1>
           
           <div className="space-y-6">
-            {casinos?.map((casino) => (
+            {casinos?.map((casino, index) => (
               <AnimatedSection key={casino._id}>
-                <CasinoComponent casino={casino} />
+                <CasinoComponent casino={casino} index={index} />
               </AnimatedSection>
             ))}
 

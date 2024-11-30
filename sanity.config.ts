@@ -7,22 +7,53 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
-import {structure} from './sanity/structure'
 
 export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
   plugins: [
-    structureTool({structure}),
-    // Vision is for querying with GROQ from inside the Studio
-    // https://www.sanity.io/docs/the-vision-plugin
+    structureTool({
+      structure: (S, context) => {
+        return S.list()
+          .title('Content')
+          .items([
+            // Regular document types
+            S.listItem()
+              .title('Casinos')
+              .schemaType('casino')
+              .child(
+                S.documentList()
+                  .title('Casinos')
+                  .filter('_type == "casino"')
+              ),
+            S.listItem()
+              .title('Categories')
+              .schemaType('category')
+              .child(
+                S.documentList()
+                  .title('Categories')
+                  .filter('_type == "category"')
+              ),
+            // Add a divider
+            S.divider(),
+            // Orderable casino list
+            orderableDocumentListDeskItem({
+              type: 'casino',
+              title: 'Order Casinos',
+              id: 'orderable-casinos',
+              filter: '_type == "casino"',
+              S,
+              context,
+            }),
+          ])
+      },
+    }),
     visionTool({defaultApiVersion: apiVersion}),
   ],
 })

@@ -1,10 +1,19 @@
 import { defineType } from 'sanity';
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
 
 export const casinoType = defineType({
   name: 'casino',
   title: 'Casino',
   type: 'document',
+  orderings: [orderRankOrdering],
+  preview: {
+    select: {
+      title: 'offerTitle',
+      media: 'casinoImage'
+    }
+  },
   fields: [
+    orderRankField({ type: "casino" }),
     {
       name: 'casinoImage',
       title: 'Casino Image',

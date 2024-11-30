@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from "next/image";
-import { Badge } from "./ui/badge";
 import ClaimButton from './ClaimButton'
 
 interface Category {
@@ -24,16 +23,24 @@ interface Casino {
 
 interface CasinoComponentProps {
   casino: Casino;
+  index: number;
 }
 
-export default function CasinoComponent({ casino }: CasinoComponentProps) {
+export default function CasinoComponent({ casino, index }: CasinoComponentProps) {
   return (
     <div className="relative group">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] opacity-50 blur-lg group-hover:opacity-70 transition-opacity duration-300"></div>
-      <div className="relative p-6 bg-[#1E2A44]/90 border border-[#00A3FF] rounded-lg shadow-[0_0_20px_rgba(0,163,255,0.3)] hover:shadow-[0_0_30px_rgba(0,163,255,0.5)] transition-all duration-300">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] opacity-100 blur-lg group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="relative p-6 bg-[#1E2A44] border border-[#00A3FF] rounded-lg shadow-[0_0_20px_rgba(0,163,255,0.3)] hover:shadow-[0_0_30px_rgba(0,163,255,0.5)] transition-all duration-300">
+        {/* Position Number */}
+        <div className="z-10 absolute -top-px -left-px w-14 h-14 flex items-center justify-center bg-[#000000] rounded-tl-lg rounded-br-lg border-r-2 border-b-2 border-[#00A3FF] shadow-[4px_4px_20px_rgba(0,163,255,0.3)]">
+          <span className="font-['Orbitron'] font-bold text-2xl bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] text-transparent bg-clip-text [text-shadow:_0_0_10px_rgba(0,163,255,0.5)]">
+            #{index + 1}
+          </span>
+        </div>
         <div className="flex flex-col md:flex-row items-center gap-6">
-          {/* Casino Logo */}
-          <div className="w-full md:w-1/4">
+          {/* Left side with Casino Logo and Ranking */}
+          <div className="w-full md:w-1/4 relative">
+            {/* Casino Logo */}
             <div className="relative w-full aspect-[3/2] rounded-lg overflow-hidden border border-[#00A3FF]/30">
               <Image
                 src={casino.imageUrl}
@@ -53,17 +60,7 @@ export default function CasinoComponent({ casino }: CasinoComponentProps) {
               <p className="text-2xl  text-white font-['Rajdhani']">{casino.offerTitle}</p>
             </div>
 
-            {/* Categories */}
-            <div className="flex flex-wrap gap-2">
-              {casino.categories?.map((category) => (
-                <Badge
-                  key={category._id}
-                  className="bg-[#00A3FF]/20 text-[#00A3FF] border-[#00A3FF] hover:bg-[#00A3FF]/30"
-                >
-                  {category.title}
-                </Badge>
-              ))}
-            </div>
+        
           </div>
 
           {/* Call to Action with Rating */}
@@ -80,7 +77,7 @@ export default function CasinoComponent({ casino }: CasinoComponentProps) {
                     className={`w-6 h-6 ${
                       star <= Math.floor(casino.rating)
                         ? "text-[#FFDD00]"
-                        : "text-[#1E2A44]"
+                        : "text-gray-600"
                     }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
