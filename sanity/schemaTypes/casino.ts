@@ -46,6 +46,12 @@ export const casinoType = defineType({
       type: 'url',
     },
     {
+      name: 'offerText',
+      title: 'Offer Text',
+      type: 'array',
+      of: [{ type: 'string' }]
+    },
+    {
         name: 'categories',
         title: "Categories",
         type: "array",

@@ -1,31 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import CasinoComponent from "@/app/components/CasinoComponent";
 import AnimatedSection from "@/app/components/AnimatedSection";
-
-interface Category {
-  _id: string;
-  title: string;
-  slug: {
-    current: string;
-  };
-}
-
-interface Casino {
-  _id: string;
-  offerTitle: string;
-  offerUrl: string;
-  offerDescription: string;
-  rating: number;
-  imageUrl: string;
-  termsConditionsUrl: string;
-  categories: Category[];
-}
-
-interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+import { Category, Casino, PageProps } from "@/app/utils/interface";
 
 async function getCasinosByCategory(slug: string) {
   const query = `*[_type == "casino" && references(*[_type == "category" && slug.current == "${slug}"]._id)] | order(orderRank) {
@@ -33,6 +9,7 @@ async function getCasinosByCategory(slug: string) {
     offerTitle,
     offerUrl,
     offerDescription,
+    offerText,
     rating,
     "imageUrl": casinoImage.asset->url,
     termsConditionsUrl,

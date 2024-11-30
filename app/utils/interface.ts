@@ -11,6 +11,7 @@ export interface Casino {
   offerTitle: string;
   offerUrl: string;
   offerDescription: string;
+  offerText: any[];
   rating: number;
   imageUrl: string;
   termsConditionsUrl: string;

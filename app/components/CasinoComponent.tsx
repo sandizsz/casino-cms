@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
 import ClaimButton from './ClaimButton'
+import { PortableText } from '@portabletext/react'
 
 interface Category {
   _id: string;
@@ -15,6 +16,7 @@ interface Casino {
   offerTitle: string;
   offerUrl: string;
   offerDescription: string;
+  offerText: any[];  // Sanity Portable Text type
   rating: number;
   imageUrl: string;
   termsConditionsUrl: string;
@@ -57,10 +59,15 @@ export default function CasinoComponent({ casino, index }: CasinoComponentProps)
               <h3 className="text-xl font-['Orbitron'] font-bold text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-2">
                 {casino.offerDescription}
               </h3>
-              <p className="text-2xl  text-white font-['Rajdhani']">{casino.offerTitle}</p>
+              <p className="text-2xl text-white font-['Rajdhani']">{casino.offerTitle}</p>
             </div>
 
-        
+            {/* Offer Text with Bullet Points */}
+            {casino.offerText && (
+              <div className="text-white prose prose-invert max-w-none prose-ul:mt-2 prose-ul:mb-2 prose-li:mt-0 prose-li:mb-0">
+                <PortableText value={casino.offerText} />
+              </div>
+            )}
           </div>
 
           {/* Call to Action with Rating */}

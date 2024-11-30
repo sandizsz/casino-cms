@@ -18,6 +18,7 @@ async function getPosts() {
     offerTitle,
     offerUrl,
     offerDescription,
+    offerText,
     rating,
     "imageUrl": casinoImage.asset->url,
     termsConditionsUrl,
