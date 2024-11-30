@@ -8,6 +8,7 @@ import CookieConsentBanner from "./components/CookieConsent";
 import { LoadingProvider } from './context/LoadingContext'
 import LoadingOverlay from './components/LoadingOverlay'
 import { NavigationEvents } from './components/NavigationEvents'
+import { Suspense } from 'react'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -47,7 +48,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${rajdhani.variable} bg-[#0D1117] text-white min-h-screen`}>
         <LoadingProvider>
-          <NavigationEvents />
+          <Suspense>
+            <NavigationEvents />
+          </Suspense>
           <LoadingOverlay />
           <Navbar />
           {children}
