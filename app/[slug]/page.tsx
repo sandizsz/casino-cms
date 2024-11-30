@@ -23,10 +23,9 @@ const pages: PageData[] = [
   paymentMethodsData
 ];
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
+export interface PageProps {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateStaticParams() {
@@ -35,7 +34,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: { params: PageProps['params'] }) {
+export default async function Page({ params }: PageProps) {
   const slug = params.slug;
   const page = pages.find((p) => p.slug === slug);
 
