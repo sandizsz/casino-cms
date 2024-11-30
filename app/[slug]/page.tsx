@@ -24,9 +24,9 @@ const pages: PageData[] = [
 ];
 
 interface PageProps {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 export async function generateStaticParams() {
@@ -36,8 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const slug = params.slug;
   const page = pages.find((p) => p.slug === slug);
 
   if (!page) {
