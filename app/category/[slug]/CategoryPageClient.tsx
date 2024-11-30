@@ -40,9 +40,9 @@ export default function CategoryPageClient({ initialCasinos, initialCategory }: 
           </h1>
           
           <div className="space-y-6">
-            {casinos?.map((casino) => (
+            {casinos?.map((casino, index) => (
               <AnimatedSection key={casino._id}>
-                <CasinoComponent casino={casino} />
+                <CasinoComponent casino={casino} index={index} />
               </AnimatedSection>
             ))}
           </div>
