@@ -1,6 +1,7 @@
 'use client';
 
 import CookieConsent from 'react-cookie-consent';
+import Link from 'next/link';
 
 const CookieConsentBanner = () => {
   return (
@@ -69,7 +70,7 @@ const CookieConsentBanner = () => {
         justifyContent: "center",
       }}>
         <span>🍪 This website uses cookies to enhance your experience. By continuing to visit this site, you agree to our use of cookies.{" "}</span>
-        <a 
+        <Link 
           href="/cookie-policy" 
           style={{ 
             textDecoration: "underline",
@@ -79,7 +80,7 @@ const CookieConsentBanner = () => {
           }}
         >
           Learn more
-        </a>
+        </Link>
       </div>
     </CookieConsent>
   );

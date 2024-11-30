@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CasinoComponent from "@/app/components/CasinoComponent"
 import AnimatedSection from "@/app/components/AnimatedSection"
 import { useLoading } from '@/app/context/LoadingContext'
@@ -9,18 +9,15 @@ import type { Casino, Category } from './types'
 interface CategoryPageClientProps {
   initialCasinos: Casino[]
   initialCategory: Category | null
-  slug: string
 }
 
-export default function CategoryPageClient({ initialCasinos, initialCategory, slug }: CategoryPageClientProps) {
+export default function CategoryPageClient({ initialCasinos, initialCategory }: CategoryPageClientProps) {
   const { setIsLoading } = useLoading()
-  const [casinos, setCasinos] = useState(initialCasinos)
-  const [category, setCategory] = useState(initialCategory)
-  const [error, setError] = useState(!initialCategory)
+  const [casinos] = useState(initialCasinos)
+  const [category] = useState(initialCategory)
+  const [error] = useState(!initialCategory)
 
-  useEffect(() => {
-    setIsLoading(false)
-  }, [setIsLoading])
+  setIsLoading(false)
 
   if (error || !category) {
     return (
