@@ -31,6 +31,15 @@ async function getCasinosByCategory(slug: string) {
       _id,
       title,
       slug
+    },
+    paymentMethods[]-> {
+      _id,
+      name,
+      "image": {
+        "asset": {
+          "url": image.asset->url
+        }
+      }
     }
   }`;
 

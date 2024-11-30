@@ -12,6 +12,16 @@ interface Category {
   };
 }
 
+interface PaymentMethod {
+  _id: string;
+  name: string;
+  image: {
+    asset: {
+      url: string;
+    };
+  };
+}
+
 interface Casino {
   _id: string;
   offerTitle: string;
@@ -22,6 +32,7 @@ interface Casino {
   imageUrl: string;
   termsConditionsUrl: string;
   categories: Category[];
+  paymentMethods: PaymentMethod[];
 }
 
 interface CasinoComponentProps {
@@ -30,6 +41,8 @@ interface CasinoComponentProps {
 }
 
 const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
+
+
   const portableTextComponents = {
     list: {
       bullet: ({ children }) => (
@@ -38,7 +51,7 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
     },
     listItem: {
       bullet: ({ children }) => (
-        <li className="text-[#C0C0C0]">{children}</li>
+        <li className="text-white">{children}</li>
       ),
     },
     marks: {
@@ -76,23 +89,53 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
           </div>
 
           {/* Casino Details */}
-          <div className="flex-1 space-y-4">
-            <div>
-              <h3 className="text-xl font-['Orbitron'] font-bold text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-2">
-                {casino.offerDescription}
-              </h3>
-              <p className="text-2xl text-white font-['Rajdhani']">{casino.offerTitle}</p>
+          <div className="flex-1">
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-xl font-['Orbitron'] font-bold text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-2">
+                  {casino.offerDescription}
+                </h3>
+                <p className="text-2xl text-white font-['Rajdhani']">{casino.offerTitle}</p>
+              </div>
+
+              {/* Offer Text with Bullet Points */}
+              <div className="text-white">
+                {casino.offerText && (
+                  <PortableText 
+                    value={casino.offerText}
+                    components={portableTextComponents}
+                  />
+                )}
+              </div>
             </div>
 
-           {/* Offer Text with Bullet Points */}
-           <div className="text-[#C0C0C0] mt-4">
-             {casino.offerText && (
-               <PortableText 
-                 value={casino.offerText}
-                 components={portableTextComponents}
-               />
-             )}
-           </div>
+            {/* Payment Methods */}
+            {casino.paymentMethods && casino.paymentMethods.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-8">
+                {casino.paymentMethods.map((method) => {
+    
+                  return (
+                    <div 
+                      key={method._id}
+                      className="relative w-14 h-10 bg-white/10 backdrop-blur-sm rounded-md p-2 flex items-center justify-center border border-white/20 shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+                      title={method.name}
+                    >
+                      {method.image?.asset?.url ? (
+                        <Image
+                          src={method.image.asset.url}
+                          alt={method.name}
+                          width={40}
+                          height={24}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <span className="text-xs text-white">{method.name}</span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Call to Action with Rating */}

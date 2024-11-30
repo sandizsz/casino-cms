@@ -40,6 +40,14 @@ export default defineConfig({
                   .title('Categories')
                   .filter('_type == "category"')
               ),
+            S.listItem()
+              .title('Payment Methods')
+              .schemaType('paymentMethod')
+              .child(
+                S.documentList()
+                  .title('Payment Methods')
+                  .filter('_type == "paymentMethod"')
+              ),
             // Add a divider
             S.divider(),
             // Orderable casino list

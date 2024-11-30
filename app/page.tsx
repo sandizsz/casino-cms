@@ -22,10 +22,19 @@ async function getPosts() {
     rating,
     "imageUrl": casinoImage.asset->url,
     termsConditionsUrl,
-     categories[]-> {
+    categories[]-> {
       _id,
       slug,
       title
+    },
+    paymentMethods[]-> {
+      _id,
+      name,
+      "image": {
+        "asset": {
+          "url": image.asset->url
+        }
+      }
     }
   }`;
 

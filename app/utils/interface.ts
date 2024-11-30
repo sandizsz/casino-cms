@@ -8,6 +8,16 @@ export interface Category {
   };
 }
 
+export interface PaymentMethod {
+  _id: string;
+  name: string;
+  image: {
+    asset: {
+      url: string;
+    };
+  };
+}
+
 export interface Casino {
   _id: string;
   offerTitle: string;
@@ -18,10 +28,12 @@ export interface Casino {
   imageUrl: string;
   termsConditionsUrl: string;
   categories: Category[];
+  paymentMethods: PaymentMethod[];
 }
 
 export interface PageProps {
   params: {
     slug: string;
   };
+  slug: string;
 }

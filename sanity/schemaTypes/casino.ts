@@ -71,6 +71,12 @@ export const casinoType = defineType({
         type: "array",
         of: [{ type: "reference", to: [{ type: "category"}]}],
 
+    },
+    {
+        name: 'paymentMethods',
+        title: "Payment Methods",
+        type: "array",
+        of: [{ type: "reference", to: [{ type: "paymentMethod"}]}],
     }
   ],
 });
