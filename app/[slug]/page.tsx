@@ -20,13 +20,13 @@ const pages: PageData[] = [
   termsConditionsData,
   cookiePolicyData,
   casinoGuidesData,
-  paymentMethodsData
+  paymentMethodsData,
 ];
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps) {
-  const slug = params.slug;
+  const { slug } = await params;
   const page = pages.find((p) => p.slug === slug);
 
   if (!page) {
