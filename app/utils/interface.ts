@@ -1,3 +1,5 @@
+import { TypedObject } from '@portabletext/types';
+
 export interface Category {
   _id: string;
   title: string;
@@ -11,7 +13,7 @@ export interface Casino {
   offerTitle: string;
   offerUrl: string;
   offerDescription: string;
-  offerText: any[];
+  offerText: TypedObject[];
   rating: number;
   imageUrl: string;
   termsConditionsUrl: string;

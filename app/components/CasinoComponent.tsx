@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from "next/image";
 import ClaimButton from './ClaimButton'
-import { PortableText } from '@portabletext/react'
+import { PortableText, PortableTextReactComponents } from '@portabletext/react'
+import { TypedObject } from '@portabletext/types'
 
 interface Category {
   _id: string;
@@ -16,7 +17,7 @@ interface Casino {
   offerTitle: string;
   offerUrl: string;
   offerDescription: string;
-  offerText: any[];  // Sanity Portable Text type
+  offerText: TypedObject[];
   rating: number;
   imageUrl: string;
   termsConditionsUrl: string;
@@ -28,7 +29,28 @@ interface CasinoComponentProps {
   index: number;
 }
 
-export default function CasinoComponent({ casino, index }: CasinoComponentProps) {
+const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
+  const portableTextComponents = {
+    list: {
+      bullet: ({ children }) => (
+        <ul className="list-disc pl-5 space-y-2">{children}</ul>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }) => (
+        <li className="text-[#C0C0C0]">{children}</li>
+      ),
+    },
+    marks: {
+      strong: ({ children }) => (
+        <strong className="font-bold text-[#FFDD00]">{children}</strong>
+      ),
+      em: ({ children }) => (
+        <em className="italic">{children}</em>
+      ),
+    },
+  } satisfies Partial<PortableTextReactComponents>;
+
   return (
     <div className="relative group">
       <div className="absolute inset-0 bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] opacity-100 blur-lg group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -62,12 +84,15 @@ export default function CasinoComponent({ casino, index }: CasinoComponentProps)
               <p className="text-2xl text-white font-['Rajdhani']">{casino.offerTitle}</p>
             </div>
 
-            {/* Offer Text with Bullet Points */}
-            {casino.offerText && (
-              <div className="text-white prose prose-invert max-w-none prose-ul:mt-2 prose-ul:mb-2 prose-li:mt-0 prose-li:mb-0">
-                <PortableText value={casino.offerText} />
-              </div>
-            )}
+           {/* Offer Text with Bullet Points */}
+           <div className="text-[#C0C0C0] mt-4">
+             {casino.offerText && (
+               <PortableText 
+                 value={casino.offerText}
+                 components={portableTextComponents}
+               />
+             )}
+           </div>
           </div>
 
           {/* Call to Action with Rating */}
@@ -110,3 +135,5 @@ export default function CasinoComponent({ casino, index }: CasinoComponentProps)
     </div>
   );
 }
+
+export default CasinoComponent;

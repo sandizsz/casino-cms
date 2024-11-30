@@ -1,7 +1,21 @@
 import { client } from "@/sanity/lib/client";
 import CasinoComponent from "@/app/components/CasinoComponent";
 import AnimatedSection from "@/app/components/AnimatedSection";
-import { Category, Casino, PageProps } from "@/app/utils/interface";
+import { Casino } from '@/app/utils/interface';
+
+interface Category {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+
+interface PageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
 
 async function getCasinosByCategory(slug: string) {
   const query = `*[_type == "casino" && references(*[_type == "category" && slug.current == "${slug}"]._id)] | order(orderRank) {
@@ -41,20 +55,17 @@ export default async function CategoryPage({ params }: PageProps) {
   const parameters = await params;
   const slug = parameters.slug;
   
-  const casinos = await getCasinosByCategory(slug);
   const category = await getCategory(slug);
-
+  
   if (!category) {
     return (
       <div className="min-h-screen bg-[#0D1117] flex items-center justify-center">
-        <div className="text-center p-12 bg-[#1E2A44]/50 rounded-lg border border-[#00A3FF] shadow-[0_0_20px_rgba(0,163,255,0.3)]">
-          <p className="text-xl font-['Rajdhani'] text-[#C0C0C0]">
-            Category not found.
-          </p>
-        </div>
+        <p className="text-white">Category not found</p>
       </div>
     );
   }
+
+  const casinos: Casino[] = await getCasinosByCategory(slug);
 
   return (
     <div className="min-h-screen bg-[#0D1117]">

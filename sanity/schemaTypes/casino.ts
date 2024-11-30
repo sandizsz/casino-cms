@@ -49,7 +49,21 @@ export const casinoType = defineType({
       name: 'offerText',
       title: 'Offer Text',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [
+        {
+          type: 'block',
+          styles: [],
+          lists: [
+            {title: 'Bullet', value: 'bullet'}
+          ],
+          marks: {
+            decorators: [
+              {title: 'Strong', value: 'strong'},
+              {title: 'Emphasis', value: 'em'}
+            ]
+          }
+        }
+      ]
     },
     {
         name: 'categories',
