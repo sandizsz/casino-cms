@@ -33,16 +33,20 @@ export function NavbarClient({ categories }: NavbarClientProps) {
           
           {/* Desktop Navigation */}
           <div className="hidden lg:flex space-x-8">
-            <Link
-              href="/"
-              className={`text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
-                pathname === "/"
-                  ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
-                  : "text-[#C0C0C0] hover:text-[#00A3FF]"
-              }`}
-            >
-              Home
-            </Link>
+            {categories.map((category) => (
+              <Link
+                key={category._id}
+                href={`/category/${category.slug.current}`}
+                className={`text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
+                  pathname === `/category/${category.slug.current}`
+                    ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
+                    : "text-[#C0C0C0] hover:text-[#00A3FF]"
+                }`}
+              >
+                {category.title}
+              </Link>
+            ))}
+            
             <Link
               href="/casino-guides"
               className={`text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
@@ -63,19 +67,16 @@ export function NavbarClient({ categories }: NavbarClientProps) {
             >
               Payment Methods
             </Link>
-            {categories.map((category) => (
-              <Link
-                key={category._id}
-                href={`/category/${category.slug.current}`}
-                className={`text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
-                  pathname === `/category/${category.slug.current}`
-                    ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
-                    : "text-[#C0C0C0] hover:text-[#00A3FF]"
-                }`}
-              >
-                {category.title}
-              </Link>
-            ))}
+            <Link
+              href="/how-to-play"
+              className={`text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
+                pathname === "/how-to-play"
+                  ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
+                  : "text-[#C0C0C0] hover:text-[#00A3FF]"
+              }`}
+            >
+              How to Play
+            </Link>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -99,17 +100,22 @@ export function NavbarClient({ categories }: NavbarClientProps) {
           }`}
         >
           <div className="py-4 pt-16 md:pt-14 space-y-2">
-            <Link
-              href="/"
-              className={`block text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
-                pathname === "/"
-                  ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
-                  : "text-[#C0C0C0] hover:text-[#00A3FF]"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
+      
+            {categories.map((category) => (
+              <Link
+                key={category._id}
+                href={`/category/${category.slug.current}`}
+                className={`block text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
+                  pathname === `/category/${category.slug.current}`
+                    ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
+                    : "text-[#C0C0C0] hover:text-[#00A3FF]"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {category.title}
+              </Link>
+            ))}
+            
             <Link
               href="/casino-guides"
               className={`block text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
@@ -132,20 +138,18 @@ export function NavbarClient({ categories }: NavbarClientProps) {
             >
               Payment Methods
             </Link>
-            {categories.map((category) => (
-              <Link
-                key={category._id}
-                href={`/category/${category.slug.current}`}
-                className={`block text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
-                  pathname === `/category/${category.slug.current}`
-                    ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
-                    : "text-[#C0C0C0] hover:text-[#00A3FF]"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {category.title}
-              </Link>
-            ))}
+
+            <Link
+              href="/how-to-play"
+              className={`block text-lg font-['Rajdhani'] font-semibold transition-colors duration-200 ${
+                pathname === "/how-to-play"
+                  ? "text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00]"
+                  : "text-[#C0C0C0] hover:text-[#00A3FF]"
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              How to Play
+            </Link>
           </div>
         </div>
       </div>

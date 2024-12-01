@@ -70,7 +70,7 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
       <div className="relative p-6 bg-[#1E2A44] border border-[#00A3FF] rounded-lg shadow-[0_0_20px_rgba(0,163,255,0.3)] hover:shadow-[0_0_30px_rgba(0,163,255,0.5)] transition-all duration-300">
         {/* Position Number */}
         <div className="z-10 absolute -top-px -left-px w-14 h-14 flex items-center justify-center bg-[#000000] rounded-tl-lg rounded-br-lg border-r-2 border-b-2 border-[#00A3FF] shadow-[4px_4px_20px_rgba(0,163,255,0.3)]">
-          <span className="font-['Orbitron'] font-bold text-2xl bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] text-transparent bg-clip-text [text-shadow:_0_0_10px_rgba(0,163,255,0.5)]">
+          <span className="font-['Orbitron'] font-bold text-xl bg-gradient-to-r from-[#00A3FF] to-[#FFDD00] text-transparent bg-clip-text [text-shadow:_0_0_10px_rgba(0,163,255,0.5)]">
             #{index + 1}
           </span>
         </div>
@@ -78,12 +78,12 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
           {/* Left side with Casino Logo and Ranking */}
           <div className="w-full md:w-1/4 relative">
             {/* Casino Logo */}
-            <div className="relative w-full aspect-[3/2] rounded-lg overflow-hidden border border-[#00A3FF]/30">
+            <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-[#00A3FF]/30">
               <Image
                 src={casino.imageUrl}
                 alt={casino.offerTitle}
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>
@@ -112,7 +112,7 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
             {/* Payment Methods */}
             {casino.paymentMethods && casino.paymentMethods.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-8">
-                {casino.paymentMethods.map((method) => {
+                {casino.paymentMethods.slice(0, 10).map((method) => {
     
                   return (
                     <div 

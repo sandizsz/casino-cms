@@ -62,7 +62,7 @@ export default function Footer() {
       <div className="border-t border-[#00A3FF]/20">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm text-[#C0C0C0]">
-            Copyright {new Date().getFullYear()} slotsseason. All rights reserved.
+            Copyright {new Date().getFullYear()} GambleStrike. All rights reserved.
           </p>
         </div>
       </div>

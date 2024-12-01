@@ -8,7 +8,7 @@ import { blackjackData } from '../data/pages/blackjack';
 import { rouletteData } from '../data/pages/roulette';
 import { baccaratData } from '../data/pages/baccarat';
 import { privacyPolicyData, disclaimerData, termsConditionsData, cookiePolicyData } from '../data/pages/legal';
-import { casinoGuidesData, paymentMethodsData } from '../data/pages/guides';
+import { casinoGuidesData, howToPlayData, paymentMethodsData } from '../data/pages/guides';
 
 // Combine all page data
 const pages: PageData[] = [
@@ -21,6 +21,7 @@ const pages: PageData[] = [
   cookiePolicyData,
   casinoGuidesData,
   paymentMethodsData,
+  howToPlayData
 ];
 
 interface PageProps {
@@ -45,7 +46,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <AnimatedSection>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-24">
         <div className="max-w-4xl mx-auto">
           {page.image ? (
             <div className="relative w-full h-64 mb-8 rounded-xl overflow-hidden">

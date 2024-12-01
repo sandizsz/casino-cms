@@ -13,7 +13,7 @@ import { baccaratData } from "./data/pages/baccarat";
 import { casinoGuidesData } from "./data/pages/guides";
 
 async function getPosts() {
-  const query = `*[_type == "casino"] | order(orderRank) {
+  const query = `*[_type == "casino"] | order(orderRank)[0...15] {
     _id,
     offerTitle,
     offerUrl,
@@ -45,7 +45,7 @@ async function getPosts() {
 export const revalidate = 60;
 
 export default async function Home() {
-  const casinos: Casino[] = await getPosts();
+  const casinos: Casino[] = (await getPosts()).slice(0, 15);
 
   const features = [
     {
@@ -84,19 +84,34 @@ export default async function Home() {
               On this page, you will find a wide ranch of deposit and no deposit casino bonus offers. Quickly compare the alternatives by browsing through the updated list of casino bonuses below. We have everything from generous welcome bonuses, a lot of free spins, cash back bonuses and more. We aim to have something for everyone and will continue to do our best to provide the most competitive comparison list for our visitors.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto pt-12">
-              <CountUp
-                end={2500}
-                label="Deposit Bonus<br />(EUR)"
-                suffix=""
-              />
-              <CountUp
-                end={200}
-                label="Free Spins"
-              />
-              <CountUp
-                end={30}
-                label="Sign Up Bonus<br />(EUR)"
-              />
+              <div className="flex flex-col items-center relative">
+                <span className="absolute -top-6 bg-gradient-to-r from-[#FFDD00] to-[#FFA500] text-transparent bg-clip-text font-bold text-lg transform -rotate-12 [text-shadow:_0_0_10px_rgba(255,221,0,0.5)]">
+                  Up to
+                </span>
+                <CountUp
+                  end={2500}
+                  label="Deposit Bonus<br />(EUR)"
+                  suffix=""
+                />
+              </div>
+              <div className="flex flex-col items-center relative">
+                <span className="absolute -top-6 bg-gradient-to-r from-[#FFDD00] to-[#FFA500] text-transparent bg-clip-text font-bold text-lg transform -rotate-12 [text-shadow:_0_0_10px_rgba(255,221,0,0.5)]">
+                  Up to
+                </span>
+                <CountUp
+                  end={200}
+                  label="Free Spins"
+                />
+              </div>
+              <div className="flex flex-col items-center relative">
+                <span className="absolute -top-6 bg-gradient-to-r from-[#FFDD00] to-[#FFA500] text-transparent bg-clip-text font-bold text-lg transform -rotate-12 [text-shadow:_0_0_10px_rgba(255,221,0,0.5)]">
+                  Up to
+                </span>
+                <CountUp
+                  end={30}
+                  label="Sign Up Bonus<br />(EUR)"
+                />
+              </div>
             </div>
           </div>
         </AnimatedSection>

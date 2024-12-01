@@ -3,7 +3,7 @@ import { Category } from "../utils/interface";
 import { NavbarClient } from "./NavbarClient";
 
 async function getCategories() {
-  const query = `*[_type == "category"] {
+  const query = `*[_type == "category"] | order(_updatedAt desc) {
     title,
     slug,
     _id
