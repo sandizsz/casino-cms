@@ -4,7 +4,7 @@ import { useState } from 'react'
 import CasinoComponent from "@/app/components/CasinoComponent"
 import AnimatedSection from "@/app/components/AnimatedSection"
 import { useLoading } from '@/app/context/LoadingContext'
-import type { Casino, Category } from './types'
+import type { Casino, Category } from '@/app/utils/interface'
 
 interface CategoryPageClientProps {
   initialCasinos: Casino[]
@@ -35,9 +35,14 @@ export default function CategoryPageClient({ initialCasinos, initialCategory }: 
     <div className="min-h-screen bg-[#0D1117]">
       <AnimatedSection className="w-full py-20 bg-gradient-to-b from-[#1E2A44] to-[#0D1117] relative overflow-hidden">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-6xl font-['Orbitron'] font-bold text-center text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-12">
+          <h1 className="text-4xl md:text-6xl font-['Orbitron'] font-bold text-center text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-4">
             {category.title}
           </h1>
+          {category.description && (
+            <p className="text-lg text-center text-[#C0C0C0] mb-12 max-w-3xl mx-auto">
+              {category.description}
+            </p>
+          )}
           
           <div className="space-y-6">
             {casinos?.map((casino, index) => (

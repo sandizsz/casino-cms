@@ -9,6 +9,7 @@ interface Category {
   slug: {
     current: string;
   };
+  description: string;
 }
 
 interface PageProps {
@@ -51,6 +52,7 @@ async function getCategory(slug: string) {
   const query = `*[_type == "category" && slug.current == "${slug}"][0] {
     _id,
     title,
+    description,
     slug
   }`;
 
@@ -83,6 +85,14 @@ export default async function CategoryPage({ params }: PageProps) {
           <h1 className="text-4xl md:text-6xl font-['Orbitron'] font-bold text-center text-[#FFDD00] [text-shadow:_0_0_30px_#FFDD00] mb-12">
             {category.title}
           </h1>
+
+          {category.description && (
+            <div className="max-w-4xl mx-auto mb-12">
+              <p className="text-[#C0C0C0] text-lg text-center font-['Rajdhani'] leading-relaxed">
+                {category.description}
+              </p>
+            </div>
+          )}
           
           <div className="space-y-6">
             {casinos?.map((casino, index) => (

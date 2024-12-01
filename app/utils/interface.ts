@@ -6,6 +6,7 @@ export interface Category {
   slug: {
     current: string;
   };
+  description?: string;
 }
 
 export interface PaymentMethod {
