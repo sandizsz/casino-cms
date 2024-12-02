@@ -173,7 +173,7 @@ const CasinoComponent: React.FC<CasinoComponentProps> = ({ casino, index }) => {
             </div>
 
             <ClaimButton 
-  offerUrl={casino.offerUrl} 
+
   offerTitle={casino.offerTitle}  // Add this line
 />
             <a
