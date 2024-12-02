@@ -30,7 +30,7 @@ export default function Footer() {
         <Link href="https://www.gamblingtherapy.org" className="hover:opacity-100 transition-opacity">
             <Image 
               src="/images/GAMBLING_THERAPY-logo.png" 
-              alt="Gambling Awareness Logo 1"
+              alt="Gambling Therapy Logo"
               width={100}
               height={50}
               className="h-8 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity"
