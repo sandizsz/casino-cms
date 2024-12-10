@@ -22,7 +22,7 @@ export function NavbarClient({ categories }: NavbarClientProps) {
             <div className="absolute -top-8 w-[140px] h-[100px] md:w-[180px] md:h-[100px] lg:w-[220px] lg:h-[120px]">
               <Image
                 src="/images/gamblestrike.png"
-                alt="Slots Season Logo"
+                alt="Gamblestrike Logo"
                 fill
                 className="object-contain"
                 priority
@@ -32,7 +32,7 @@ export function NavbarClient({ categories }: NavbarClientProps) {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex space-x-8">
+          <div className="hidden xl:flex space-x-8">
             {categories.map((category) => (
               <Link
                 key={category._id}
@@ -82,7 +82,7 @@ export function NavbarClient({ categories }: NavbarClientProps) {
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-[#C0C0C0] hover:text-[#00A3FF] transition-colors duration-200"
+            className="xl:hidden p-2 text-[#C0C0C0] hover:text-[#00A3FF] transition-colors duration-200"
             aria-label="Toggle menu"
           >
             <div className="relative w-6 h-6">
@@ -95,7 +95,7 @@ export function NavbarClient({ categories }: NavbarClientProps) {
 
         {/* Mobile Menu */}
         <div 
-          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out relative z-50 bg-[#1E2A44] ${
+          className={`xl:hidden overflow-hidden transition-all duration-300 ease-in-out relative z-50 bg-[#1E2A44] ${
             isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
